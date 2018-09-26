@@ -1,0 +1,44 @@
+
+.item{
+    display: flex;
+}
+
+.item_cell {
+    display: flex;
+    justify-content: center;
+    border: 1px solid;
+    width: 15px;
+    height: 15px;
+    background-color: papayawhip;
+    cursor: pointer;
+}
+.btnGrid{
+    background-color: darkgoldenrod;
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px 0px 5px 0px;
+    width: 140px;
+    height: 30px;
+}
+
+.inputRows, .inputCols{
+    width: 140px;
+    padding-left: 3px;
+    margin: 5px 5px;
+}
+
+.displayGrid{
+    text-align: center;
+    margin-left: 120px;
+}
+
+.input_cell{
+    width: 15px;
+    height: 15px;
+    border: 1px solid;
+    background-color: papayawhip;
+    cursor: pointer;
+}
+
