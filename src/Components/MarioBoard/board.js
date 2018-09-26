@@ -11,12 +11,29 @@ class Board extends React.Component {
             displayGridLayout: false,
             rows : [] ,
             travelledGrid : 0 ,
+            fullyTraveresed : false ,
         }
         this.displayGrid = this.displayGrid.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.moveMario = this.moveMario.bind(this);
 
         this.handleInputDisplay = this.handleInputDisplay.bind(this);
+    }
+
+    // Check each elemnt in the Grid is visited and is Empty
+    checkGridEmpty(){
+        let rows = this.state.rows ;
+        for(let i=0;i<this.state.rows.length; i++){
+            for(let j=0;j< rows[i].props.children.length;j++ ){
+                if(rows[i].props.children[j].props.children.props.value != '' ){
+                    this.state.fullyTraveresed == false ;
+                    return;
+                }
+                else{
+                    this.state.fullyTraveresed == true 
+                }
+            }
+        }
     }
 
     moveMario(e){
@@ -157,32 +174,38 @@ class Board extends React.Component {
         }
         // default place of mario is at (0,2)
         this.state.rows = rows ;
+        console.log("rows", this.state.rows );
+        // console.log("vallll", this.state.rows[1].props.children[1].props.children.props.value)
         if(this.state.totalCols > 1) {
+            console.log("obj!!!!!",this.state.rows[0].props.children[0].props.children.props.value);
             // this.state.rows[1].props.children[0].props.children = 'M'
         }           
         return (
             <div>
                 <div>
-                    <div>
-                        <input type="number" value={this.state.totalRows} onChange={this.handleChange} name="totalRows" className="inputRows" placeholder="Enter Number of Rows" />
-                    </div>
-                    <div>
-                        <input type="number" value={this.state.totalCols} onChange={this.handleChange} name="totalCols" className="inputCols" placeholder="Enter Number of Columns" />
-                    </div>
-                    <button onClick={this.displayGrid} className="btnGrid" > Display Mario Grid </button>
-                    <div>
-                        {this.state.displayGridLayout &&
-                            <div>
-                                <h5> 
-                                    The grid is {this.state.totalRows != '' ? this.state.totalRows : '0' } by {this.state.totalCols != '' ? this.state.totalCols : '0'}
-                                </h5> 
-                                <div className="displayGrid">
-                                    {this.state.rows}
-                                </div>
-                            </div>
-                        }
-                    </div>
+                    <input type="number" value={this.state.totalRows} onChange={this.handleChange} name="totalRows" className="inputRows" placeholder="Enter Number of Rows" />
                 </div>
+                <div>
+                    <input type="number" value={this.state.totalCols} onChange={this.handleChange} name="totalCols" className="inputCols" placeholder="Enter Number of Columns" />
+                </div>
+                <button onClick={this.displayGrid} className="btnGrid" > Display Mario Grid </button>
+                <div>
+                    {this.state.displayGridLayout &&
+                        <div>
+                            <h5> 
+                                The grid is {this.state.totalRows != '' ? this.state.totalRows : '0' } by {this.state.totalCols != '' ? this.state.totalCols : '0'}
+                            </h5> 
+                            <div className="displayGrid">
+                                {this.state.rows}
+                            </div>
+                        </div>
+                    }
+                </div>
+                { this.state.fullyTraveresed &&
+                    <div>
+                        The number of grids Mario has visited : {this.state.travelledGrid} 
+                    </div>
+                }
             </div>
         );
     }
